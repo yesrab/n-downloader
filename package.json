@@ -3,14 +3,20 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite dev --port 3000",
-    "build": "vite build",
+    "dev": "APP_MODE=downloader vite dev --port 3000",
+    "dev:landing": "APP_MODE=landing vite dev --port 3000",
+    "dev:downloader": "APP_MODE=downloader vite dev --port 3000",
+    "build": "APP_MODE=downloader vite build",
+    "build:landing": "APP_MODE=landing vite build",
+    "build:downloader": "APP_MODE=downloader vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx}\"",
     "check": "prettier --check \"**/*.{ts,tsx,js,jsx}\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "pnpm typecheck:landing && pnpm typecheck:downloader",
+    "typecheck:landing": "APP_MODE=landing vite build && tsc --noEmit -p tsconfig.landing.json",
+    "typecheck:downloader": "APP_MODE=downloader vite build && tsc --noEmit -p tsconfig.downloader.json"
   },
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "^5.2.8",

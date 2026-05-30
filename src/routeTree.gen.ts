@@ -9,50 +9,495 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as homeIndexRouteImport } from './routes/(home)/index'
+import { Route as appTorrentsRouteImport } from './routes/(app)/torrents'
+import { Route as appSettingsRouteImport } from './routes/(app)/settings'
+import { Route as appQueueRouteImport } from './routes/(app)/queue'
+import { Route as appHistoryRouteImport } from './routes/(app)/history'
+import { Route as appDownloadsRouteImport } from './routes/(app)/downloads'
+import { Route as appTorrentsTrackersRouteImport } from './routes/(app)/torrents.trackers'
+import { Route as appTorrentsSwarmRouteImport } from './routes/(app)/torrents.swarm'
+import { Route as appTorrentsRatioRulesRouteImport } from './routes/(app)/torrents.ratio-rules'
+import { Route as appSettingsSupportRouteImport } from './routes/(app)/settings.support'
+import { Route as appSettingsStorageRouteImport } from './routes/(app)/settings.storage'
+import { Route as appSettingsServiceHealthRouteImport } from './routes/(app)/settings.service-health'
+import { Route as appSettingsSafetyRouteImport } from './routes/(app)/settings.safety'
+import { Route as appSettingsFeedbackRouteImport } from './routes/(app)/settings.feedback'
+import { Route as appSettingsBandwidthRouteImport } from './routes/(app)/settings.bandwidth'
+import { Route as appQueueSchedulerRouteImport } from './routes/(app)/queue.scheduler'
+import { Route as appQueuePrioritiesRouteImport } from './routes/(app)/queue.priorities'
+import { Route as appDownloadsLinkGrabberRouteImport } from './routes/(app)/downloads.link-grabber'
+import { Route as appDownloadsHostAccountsRouteImport } from './routes/(app)/downloads.host-accounts'
+import { Route as appDownloadsExtractionRouteImport } from './routes/(app)/downloads.extraction'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
+const homeIndexRoute = homeIndexRouteImport.update({
+  id: '/(home)/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const appTorrentsRoute = appTorrentsRouteImport.update({
+  id: '/(app)/torrents',
+  path: '/torrents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appSettingsRoute = appSettingsRouteImport.update({
+  id: '/(app)/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appQueueRoute = appQueueRouteImport.update({
+  id: '/(app)/queue',
+  path: '/queue',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appHistoryRoute = appHistoryRouteImport.update({
+  id: '/(app)/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appDownloadsRoute = appDownloadsRouteImport.update({
+  id: '/(app)/downloads',
+  path: '/downloads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appTorrentsTrackersRoute = appTorrentsTrackersRouteImport.update({
+  id: '/trackers',
+  path: '/trackers',
+  getParentRoute: () => appTorrentsRoute,
+} as any)
+const appTorrentsSwarmRoute = appTorrentsSwarmRouteImport.update({
+  id: '/swarm',
+  path: '/swarm',
+  getParentRoute: () => appTorrentsRoute,
+} as any)
+const appTorrentsRatioRulesRoute = appTorrentsRatioRulesRouteImport.update({
+  id: '/ratio-rules',
+  path: '/ratio-rules',
+  getParentRoute: () => appTorrentsRoute,
+} as any)
+const appSettingsSupportRoute = appSettingsSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => appSettingsRoute,
+} as any)
+const appSettingsStorageRoute = appSettingsStorageRouteImport.update({
+  id: '/storage',
+  path: '/storage',
+  getParentRoute: () => appSettingsRoute,
+} as any)
+const appSettingsServiceHealthRoute =
+  appSettingsServiceHealthRouteImport.update({
+    id: '/service-health',
+    path: '/service-health',
+    getParentRoute: () => appSettingsRoute,
+  } as any)
+const appSettingsSafetyRoute = appSettingsSafetyRouteImport.update({
+  id: '/safety',
+  path: '/safety',
+  getParentRoute: () => appSettingsRoute,
+} as any)
+const appSettingsFeedbackRoute = appSettingsFeedbackRouteImport.update({
+  id: '/feedback',
+  path: '/feedback',
+  getParentRoute: () => appSettingsRoute,
+} as any)
+const appSettingsBandwidthRoute = appSettingsBandwidthRouteImport.update({
+  id: '/bandwidth',
+  path: '/bandwidth',
+  getParentRoute: () => appSettingsRoute,
+} as any)
+const appQueueSchedulerRoute = appQueueSchedulerRouteImport.update({
+  id: '/scheduler',
+  path: '/scheduler',
+  getParentRoute: () => appQueueRoute,
+} as any)
+const appQueuePrioritiesRoute = appQueuePrioritiesRouteImport.update({
+  id: '/priorities',
+  path: '/priorities',
+  getParentRoute: () => appQueueRoute,
+} as any)
+const appDownloadsLinkGrabberRoute = appDownloadsLinkGrabberRouteImport.update({
+  id: '/link-grabber',
+  path: '/link-grabber',
+  getParentRoute: () => appDownloadsRoute,
+} as any)
+const appDownloadsHostAccountsRoute =
+  appDownloadsHostAccountsRouteImport.update({
+    id: '/host-accounts',
+    path: '/host-accounts',
+    getParentRoute: () => appDownloadsRoute,
+  } as any)
+const appDownloadsExtractionRoute = appDownloadsExtractionRouteImport.update({
+  id: '/extraction',
+  path: '/extraction',
+  getParentRoute: () => appDownloadsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/downloads': typeof appDownloadsRouteWithChildren
+  '/history': typeof appHistoryRoute
+  '/queue': typeof appQueueRouteWithChildren
+  '/settings': typeof appSettingsRouteWithChildren
+  '/torrents': typeof appTorrentsRouteWithChildren
+  '/': typeof homeIndexRoute
+  '/downloads/extraction': typeof appDownloadsExtractionRoute
+  '/downloads/host-accounts': typeof appDownloadsHostAccountsRoute
+  '/downloads/link-grabber': typeof appDownloadsLinkGrabberRoute
+  '/queue/priorities': typeof appQueuePrioritiesRoute
+  '/queue/scheduler': typeof appQueueSchedulerRoute
+  '/settings/bandwidth': typeof appSettingsBandwidthRoute
+  '/settings/feedback': typeof appSettingsFeedbackRoute
+  '/settings/safety': typeof appSettingsSafetyRoute
+  '/settings/service-health': typeof appSettingsServiceHealthRoute
+  '/settings/storage': typeof appSettingsStorageRoute
+  '/settings/support': typeof appSettingsSupportRoute
+  '/torrents/ratio-rules': typeof appTorrentsRatioRulesRoute
+  '/torrents/swarm': typeof appTorrentsSwarmRoute
+  '/torrents/trackers': typeof appTorrentsTrackersRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/downloads': typeof appDownloadsRouteWithChildren
+  '/history': typeof appHistoryRoute
+  '/queue': typeof appQueueRouteWithChildren
+  '/settings': typeof appSettingsRouteWithChildren
+  '/torrents': typeof appTorrentsRouteWithChildren
+  '/': typeof homeIndexRoute
+  '/downloads/extraction': typeof appDownloadsExtractionRoute
+  '/downloads/host-accounts': typeof appDownloadsHostAccountsRoute
+  '/downloads/link-grabber': typeof appDownloadsLinkGrabberRoute
+  '/queue/priorities': typeof appQueuePrioritiesRoute
+  '/queue/scheduler': typeof appQueueSchedulerRoute
+  '/settings/bandwidth': typeof appSettingsBandwidthRoute
+  '/settings/feedback': typeof appSettingsFeedbackRoute
+  '/settings/safety': typeof appSettingsSafetyRoute
+  '/settings/service-health': typeof appSettingsServiceHealthRoute
+  '/settings/storage': typeof appSettingsStorageRoute
+  '/settings/support': typeof appSettingsSupportRoute
+  '/torrents/ratio-rules': typeof appTorrentsRatioRulesRoute
+  '/torrents/swarm': typeof appTorrentsSwarmRoute
+  '/torrents/trackers': typeof appTorrentsTrackersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/(app)/downloads': typeof appDownloadsRouteWithChildren
+  '/(app)/history': typeof appHistoryRoute
+  '/(app)/queue': typeof appQueueRouteWithChildren
+  '/(app)/settings': typeof appSettingsRouteWithChildren
+  '/(app)/torrents': typeof appTorrentsRouteWithChildren
+  '/(home)/': typeof homeIndexRoute
+  '/(app)/downloads/extraction': typeof appDownloadsExtractionRoute
+  '/(app)/downloads/host-accounts': typeof appDownloadsHostAccountsRoute
+  '/(app)/downloads/link-grabber': typeof appDownloadsLinkGrabberRoute
+  '/(app)/queue/priorities': typeof appQueuePrioritiesRoute
+  '/(app)/queue/scheduler': typeof appQueueSchedulerRoute
+  '/(app)/settings/bandwidth': typeof appSettingsBandwidthRoute
+  '/(app)/settings/feedback': typeof appSettingsFeedbackRoute
+  '/(app)/settings/safety': typeof appSettingsSafetyRoute
+  '/(app)/settings/service-health': typeof appSettingsServiceHealthRoute
+  '/(app)/settings/storage': typeof appSettingsStorageRoute
+  '/(app)/settings/support': typeof appSettingsSupportRoute
+  '/(app)/torrents/ratio-rules': typeof appTorrentsRatioRulesRoute
+  '/(app)/torrents/swarm': typeof appTorrentsSwarmRoute
+  '/(app)/torrents/trackers': typeof appTorrentsTrackersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/downloads'
+    | '/history'
+    | '/queue'
+    | '/settings'
+    | '/torrents'
+    | '/'
+    | '/downloads/extraction'
+    | '/downloads/host-accounts'
+    | '/downloads/link-grabber'
+    | '/queue/priorities'
+    | '/queue/scheduler'
+    | '/settings/bandwidth'
+    | '/settings/feedback'
+    | '/settings/safety'
+    | '/settings/service-health'
+    | '/settings/storage'
+    | '/settings/support'
+    | '/torrents/ratio-rules'
+    | '/torrents/swarm'
+    | '/torrents/trackers'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/downloads'
+    | '/history'
+    | '/queue'
+    | '/settings'
+    | '/torrents'
+    | '/'
+    | '/downloads/extraction'
+    | '/downloads/host-accounts'
+    | '/downloads/link-grabber'
+    | '/queue/priorities'
+    | '/queue/scheduler'
+    | '/settings/bandwidth'
+    | '/settings/feedback'
+    | '/settings/safety'
+    | '/settings/service-health'
+    | '/settings/storage'
+    | '/settings/support'
+    | '/torrents/ratio-rules'
+    | '/torrents/swarm'
+    | '/torrents/trackers'
+  id:
+    | '__root__'
+    | '/(app)/downloads'
+    | '/(app)/history'
+    | '/(app)/queue'
+    | '/(app)/settings'
+    | '/(app)/torrents'
+    | '/(home)/'
+    | '/(app)/downloads/extraction'
+    | '/(app)/downloads/host-accounts'
+    | '/(app)/downloads/link-grabber'
+    | '/(app)/queue/priorities'
+    | '/(app)/queue/scheduler'
+    | '/(app)/settings/bandwidth'
+    | '/(app)/settings/feedback'
+    | '/(app)/settings/safety'
+    | '/(app)/settings/service-health'
+    | '/(app)/settings/storage'
+    | '/(app)/settings/support'
+    | '/(app)/torrents/ratio-rules'
+    | '/(app)/torrents/swarm'
+    | '/(app)/torrents/trackers'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  appDownloadsRoute: typeof appDownloadsRouteWithChildren
+  appHistoryRoute: typeof appHistoryRoute
+  appQueueRoute: typeof appQueueRouteWithChildren
+  appSettingsRoute: typeof appSettingsRouteWithChildren
+  appTorrentsRoute: typeof appTorrentsRouteWithChildren
+  homeIndexRoute: typeof homeIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/(home)/': {
+      id: '/(home)/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof homeIndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/(app)/torrents': {
+      id: '/(app)/torrents'
+      path: '/torrents'
+      fullPath: '/torrents'
+      preLoaderRoute: typeof appTorrentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/settings': {
+      id: '/(app)/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof appSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/queue': {
+      id: '/(app)/queue'
+      path: '/queue'
+      fullPath: '/queue'
+      preLoaderRoute: typeof appQueueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/history': {
+      id: '/(app)/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof appHistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/downloads': {
+      id: '/(app)/downloads'
+      path: '/downloads'
+      fullPath: '/downloads'
+      preLoaderRoute: typeof appDownloadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/torrents/trackers': {
+      id: '/(app)/torrents/trackers'
+      path: '/trackers'
+      fullPath: '/torrents/trackers'
+      preLoaderRoute: typeof appTorrentsTrackersRouteImport
+      parentRoute: typeof appTorrentsRoute
+    }
+    '/(app)/torrents/swarm': {
+      id: '/(app)/torrents/swarm'
+      path: '/swarm'
+      fullPath: '/torrents/swarm'
+      preLoaderRoute: typeof appTorrentsSwarmRouteImport
+      parentRoute: typeof appTorrentsRoute
+    }
+    '/(app)/torrents/ratio-rules': {
+      id: '/(app)/torrents/ratio-rules'
+      path: '/ratio-rules'
+      fullPath: '/torrents/ratio-rules'
+      preLoaderRoute: typeof appTorrentsRatioRulesRouteImport
+      parentRoute: typeof appTorrentsRoute
+    }
+    '/(app)/settings/support': {
+      id: '/(app)/settings/support'
+      path: '/support'
+      fullPath: '/settings/support'
+      preLoaderRoute: typeof appSettingsSupportRouteImport
+      parentRoute: typeof appSettingsRoute
+    }
+    '/(app)/settings/storage': {
+      id: '/(app)/settings/storage'
+      path: '/storage'
+      fullPath: '/settings/storage'
+      preLoaderRoute: typeof appSettingsStorageRouteImport
+      parentRoute: typeof appSettingsRoute
+    }
+    '/(app)/settings/service-health': {
+      id: '/(app)/settings/service-health'
+      path: '/service-health'
+      fullPath: '/settings/service-health'
+      preLoaderRoute: typeof appSettingsServiceHealthRouteImport
+      parentRoute: typeof appSettingsRoute
+    }
+    '/(app)/settings/safety': {
+      id: '/(app)/settings/safety'
+      path: '/safety'
+      fullPath: '/settings/safety'
+      preLoaderRoute: typeof appSettingsSafetyRouteImport
+      parentRoute: typeof appSettingsRoute
+    }
+    '/(app)/settings/feedback': {
+      id: '/(app)/settings/feedback'
+      path: '/feedback'
+      fullPath: '/settings/feedback'
+      preLoaderRoute: typeof appSettingsFeedbackRouteImport
+      parentRoute: typeof appSettingsRoute
+    }
+    '/(app)/settings/bandwidth': {
+      id: '/(app)/settings/bandwidth'
+      path: '/bandwidth'
+      fullPath: '/settings/bandwidth'
+      preLoaderRoute: typeof appSettingsBandwidthRouteImport
+      parentRoute: typeof appSettingsRoute
+    }
+    '/(app)/queue/scheduler': {
+      id: '/(app)/queue/scheduler'
+      path: '/scheduler'
+      fullPath: '/queue/scheduler'
+      preLoaderRoute: typeof appQueueSchedulerRouteImport
+      parentRoute: typeof appQueueRoute
+    }
+    '/(app)/queue/priorities': {
+      id: '/(app)/queue/priorities'
+      path: '/priorities'
+      fullPath: '/queue/priorities'
+      preLoaderRoute: typeof appQueuePrioritiesRouteImport
+      parentRoute: typeof appQueueRoute
+    }
+    '/(app)/downloads/link-grabber': {
+      id: '/(app)/downloads/link-grabber'
+      path: '/link-grabber'
+      fullPath: '/downloads/link-grabber'
+      preLoaderRoute: typeof appDownloadsLinkGrabberRouteImport
+      parentRoute: typeof appDownloadsRoute
+    }
+    '/(app)/downloads/host-accounts': {
+      id: '/(app)/downloads/host-accounts'
+      path: '/host-accounts'
+      fullPath: '/downloads/host-accounts'
+      preLoaderRoute: typeof appDownloadsHostAccountsRouteImport
+      parentRoute: typeof appDownloadsRoute
+    }
+    '/(app)/downloads/extraction': {
+      id: '/(app)/downloads/extraction'
+      path: '/extraction'
+      fullPath: '/downloads/extraction'
+      preLoaderRoute: typeof appDownloadsExtractionRouteImport
+      parentRoute: typeof appDownloadsRoute
     }
   }
 }
 
+interface appDownloadsRouteChildren {
+  appDownloadsExtractionRoute: typeof appDownloadsExtractionRoute
+  appDownloadsHostAccountsRoute: typeof appDownloadsHostAccountsRoute
+  appDownloadsLinkGrabberRoute: typeof appDownloadsLinkGrabberRoute
+}
+
+const appDownloadsRouteChildren: appDownloadsRouteChildren = {
+  appDownloadsExtractionRoute: appDownloadsExtractionRoute,
+  appDownloadsHostAccountsRoute: appDownloadsHostAccountsRoute,
+  appDownloadsLinkGrabberRoute: appDownloadsLinkGrabberRoute,
+}
+
+const appDownloadsRouteWithChildren = appDownloadsRoute._addFileChildren(
+  appDownloadsRouteChildren,
+)
+
+interface appQueueRouteChildren {
+  appQueuePrioritiesRoute: typeof appQueuePrioritiesRoute
+  appQueueSchedulerRoute: typeof appQueueSchedulerRoute
+}
+
+const appQueueRouteChildren: appQueueRouteChildren = {
+  appQueuePrioritiesRoute: appQueuePrioritiesRoute,
+  appQueueSchedulerRoute: appQueueSchedulerRoute,
+}
+
+const appQueueRouteWithChildren = appQueueRoute._addFileChildren(
+  appQueueRouteChildren,
+)
+
+interface appSettingsRouteChildren {
+  appSettingsBandwidthRoute: typeof appSettingsBandwidthRoute
+  appSettingsFeedbackRoute: typeof appSettingsFeedbackRoute
+  appSettingsSafetyRoute: typeof appSettingsSafetyRoute
+  appSettingsServiceHealthRoute: typeof appSettingsServiceHealthRoute
+  appSettingsStorageRoute: typeof appSettingsStorageRoute
+  appSettingsSupportRoute: typeof appSettingsSupportRoute
+}
+
+const appSettingsRouteChildren: appSettingsRouteChildren = {
+  appSettingsBandwidthRoute: appSettingsBandwidthRoute,
+  appSettingsFeedbackRoute: appSettingsFeedbackRoute,
+  appSettingsSafetyRoute: appSettingsSafetyRoute,
+  appSettingsServiceHealthRoute: appSettingsServiceHealthRoute,
+  appSettingsStorageRoute: appSettingsStorageRoute,
+  appSettingsSupportRoute: appSettingsSupportRoute,
+}
+
+const appSettingsRouteWithChildren = appSettingsRoute._addFileChildren(
+  appSettingsRouteChildren,
+)
+
+interface appTorrentsRouteChildren {
+  appTorrentsRatioRulesRoute: typeof appTorrentsRatioRulesRoute
+  appTorrentsSwarmRoute: typeof appTorrentsSwarmRoute
+  appTorrentsTrackersRoute: typeof appTorrentsTrackersRoute
+}
+
+const appTorrentsRouteChildren: appTorrentsRouteChildren = {
+  appTorrentsRatioRulesRoute: appTorrentsRatioRulesRoute,
+  appTorrentsSwarmRoute: appTorrentsSwarmRoute,
+  appTorrentsTrackersRoute: appTorrentsTrackersRoute,
+}
+
+const appTorrentsRouteWithChildren = appTorrentsRoute._addFileChildren(
+  appTorrentsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  appDownloadsRoute: appDownloadsRouteWithChildren,
+  appHistoryRoute: appHistoryRoute,
+  appQueueRoute: appQueueRouteWithChildren,
+  appSettingsRoute: appSettingsRouteWithChildren,
+  appTorrentsRoute: appTorrentsRouteWithChildren,
+  homeIndexRoute: homeIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

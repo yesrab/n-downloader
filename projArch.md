@@ -66,15 +66,15 @@ tanstackStart({ router: { routeFileIgnorePattern } })
 
 ```jsonc
 {
-  "dev": "APP_MODE=downloader vite dev --port 3000",       // default
-  "dev:landing":    "APP_MODE=landing vite dev --port 3000",
-  "dev:downloader": "APP_MODE=downloader vite dev --port 3000",
-  "build":           "APP_MODE=downloader vite build",     // default
-  "build:landing":   "APP_MODE=landing vite build",
-  "build:downloader":"APP_MODE=downloader vite build",
-  "typecheck":            "pnpm typecheck:landing && pnpm typecheck:downloader",
-  "typecheck:landing":    "APP_MODE=landing vite build && tsc --noEmit -p tsconfig.landing.json",
-  "typecheck:downloader": "APP_MODE=downloader vite build && tsc --noEmit -p tsconfig.downloader.json"
+  "dev": "cross-env APP_MODE=downloader vite dev --port 3000", // default
+  "dev:landing": "cross-env APP_MODE=landing vite dev --port 3000",
+  "dev:downloader": "cross-env APP_MODE=downloader vite dev --port 3000",
+  "build": "cross-env APP_MODE=downloader vite build", // default
+  "build:landing": "cross-env APP_MODE=landing vite build",
+  "build:downloader": "cross-env APP_MODE=downloader vite build",
+  "typecheck": "pnpm typecheck:landing && pnpm typecheck:downloader",
+  "typecheck:landing": "cross-env APP_MODE=landing vite build && tsc --noEmit -p tsconfig.landing.json",
+  "typecheck:downloader": "cross-env APP_MODE=downloader vite build && tsc --noEmit -p tsconfig.downloader.json",
 }
 ```
 
@@ -127,7 +127,7 @@ If TanStack ever ships an official Vercel preset, this shim becomes deletable.
 
 The downloader image work is **deferred** at user request ("no need node server for now"). When picked back up, plan is:
 
-- `APP_MODE=downloader pnpm build` produces `dist/`.
+- `pnpm build:downloader` produces `dist/`.
 - A small Node entry (`server.js` style) imports `dist/server/server.js`'s `fetch` and serves it via `srvx` or `node:http`.
 - Dockerfile uses a small Node base image, copies `dist/`, exposes the listener.
 - No landing-page code is in this image (`routeFileIgnorePattern` excludes `(home)` from codegen).
@@ -148,13 +148,13 @@ The downloader image work is **deferred** at user request ("no need node server 
 
 ## File Index
 
-| Path | Purpose |
-|------|---------|
-| `vite.config.ts` | Reads `APP_MODE`, sets `routeFileIgnorePattern`, exposes `import.meta.env.APP_MODE` |
-| `vercel.json` | Vercel build + output + rewrite config (landing mode) |
-| `api/index.js` | Node `(req, res)` ↔ Web `Request`/`Response` adapter for Vercel |
-| `tsconfig.landing.json` | Excludes `src/routes/(app)/**` |
-| `tsconfig.downloader.json` | Excludes `src/routes/(home)/**` |
-| `src/routes/(home)/index.tsx` | Landing page `/` |
-| `src/routes/(app)/index.tsx` | Downloader `/` → redirects to `/queue` |
-| `stylePhilosophy.md` | Visual / UX rules (Teenage Engineering inspired, JetBrains Mono, hard borders, signal palette) |
+| Path                          | Purpose                                                                                        |
+| ----------------------------- | ---------------------------------------------------------------------------------------------- |
+| `vite.config.ts`              | Reads `APP_MODE`, sets `routeFileIgnorePattern`, exposes `import.meta.env.APP_MODE`            |
+| `vercel.json`                 | Vercel build + output + rewrite config (landing mode)                                          |
+| `api/index.js`                | Node `(req, res)` ↔ Web `Request`/`Response` adapter for Vercel                                |
+| `tsconfig.landing.json`       | Excludes `src/routes/(app)/**`                                                                 |
+| `tsconfig.downloader.json`    | Excludes `src/routes/(home)/**`                                                                |
+| `src/routes/(home)/index.tsx` | Landing page `/`                                                                               |
+| `src/routes/(app)/index.tsx`  | Downloader `/` → redirects to `/queue`                                                         |
+| `stylePhilosophy.md`          | Visual / UX rules (Teenage Engineering inspired, JetBrains Mono, hard borders, signal palette) |

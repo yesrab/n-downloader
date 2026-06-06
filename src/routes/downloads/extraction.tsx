@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router"
 import { DummyRoutePage } from "@/components/screens/dashboard-pages"
 import { DashboardShell } from "@/components/layout/dashboard-shell"
 
-export const Route = createFileRoute("/(app)/downloads/extraction")({
+export const Route = createFileRoute("/downloads/extraction")({
   component: ExtractionRoute,
 })
 

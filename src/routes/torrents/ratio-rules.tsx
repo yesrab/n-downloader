@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router"
 import { DummyRoutePage } from "@/components/screens/dashboard-pages"
 import { DashboardShell } from "@/components/layout/dashboard-shell"
 
-export const Route = createFileRoute("/(app)/torrents/ratio-rules")({
+export const Route = createFileRoute("/torrents/ratio-rules")({
   component: RatioRulesRoute,
 })
 

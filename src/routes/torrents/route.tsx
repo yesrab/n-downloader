@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router"
 import { TorrentsPage } from "@/components/screens/dashboard-pages"
 import { DashboardShell } from "@/components/layout/dashboard-shell"
 
-export const Route = createFileRoute("/(app)/torrents")({
+export const Route = createFileRoute("/torrents")({
   component: TorrentsRoute,
 })
 

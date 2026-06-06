@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router"
 import { DummyRoutePage } from "@/components/screens/dashboard-pages"
 import { DashboardShell } from "@/components/layout/dashboard-shell"
 
-export const Route = createFileRoute("/(app)/settings/service-health")({
+export const Route = createFileRoute("/settings/service-health")({
   component: ServiceHealthRoute,
 })
 

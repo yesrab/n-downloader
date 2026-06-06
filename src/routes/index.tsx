@@ -5,7 +5,7 @@ import { DashboardShell } from "@/components/layout/dashboard-shell"
 import { DashboardHome } from "@/components/screens/dashboard-pages"
 import { LandingPage } from "@/components/screens/landing-page"
 
-export const Route = createFileRoute("/(home)/")({ component: App })
+export const Route = createFileRoute("/")({ component: App })
 
 type DeploymentSurface = "edge" | "sustained"
 
@@ -28,7 +28,8 @@ const homeComponentBySurface: Record<DeploymentSurface, ComponentType> = {
 }
 
 const deploymentTarget =
-  import.meta.env.VITE_N_DOWNLOADER_DEPLOYMENT_TARGET ?? "sustained"
+  import.meta.env.VITE_N_DOWNLOADER_DEPLOYMENT_TARGET ??
+  (import.meta.env.APP_MODE === "landing" ? "edge" : "sustained")
 
 function App() {
   const deploymentSurface =

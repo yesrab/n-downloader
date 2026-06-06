@@ -18,6 +18,8 @@ if (APP_MODE !== "landing" && APP_MODE !== "downloader") {
 const routeFileIgnorePattern =
   APP_MODE === "landing" ? "\\(app\\)" : "\\(home\\)"
 
+  console.log(`Starting in APP_MODE="${APP_MODE}"`)
+
 const config = defineConfig({
   resolve: { tsconfigPaths: true },
   define: {
